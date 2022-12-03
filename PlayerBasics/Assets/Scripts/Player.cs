@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
 
         recoveryCounter += Time.deltaTime;
 
+        CheckBoundaries();
+
+    }
+
+    void CheckBoundaries(){
         if (transform.position.x > 8.4f)
         {
             transform.position = new Vector3(8.4f, transform.position.y, 0);
@@ -44,15 +49,16 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -4.5f, 0);
             Hurt();
         }
+    }
 
-        void Hurt()
+    
+    void Hurt()
+    {
+        if (recoveryCounter > 2)
         {
-            if (recoveryCounter > 2)
-            {
-                maxHealth -= 1;
-                recoveryCounter = 0;
-                Debug.Log(maxHealth);
-            }
+            maxHealth -= 1;
+            recoveryCounter = 0;
+            Debug.Log(maxHealth);
         }
     }
 }
